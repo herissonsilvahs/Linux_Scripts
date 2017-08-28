@@ -2,7 +2,10 @@
 
 echo -e "Iniciando configuracao..."
 
-sudo su
+if [[ ! -d "/etc/modprob.d/" ]]
+then
+	sudo mkdir /etc/modprob.d/
+fi
 
 sudo cp ./i2c_hid.conf /etc/modprob.d/
 
@@ -16,13 +19,13 @@ echo -e "Configuracao finalizada, necessario reiniciar sistema"
 echo -e "Deseja reiniciar agora:(s/n)"
 read resp
 
-if [[$resp = 's' || $resp = 'S']]
+if [[ $resp = 's' || $resp = 'S' ]]
 then
 	echo -e "Reiniciando sistema..."
 	sleep 2
 	sudo reboot
 
-elif [[$resp = 'n' || $resp = 'N']]
-	
+elif [[ $resp = 'n' || $resp = 'N' ]]
+
 	exit
 fi
